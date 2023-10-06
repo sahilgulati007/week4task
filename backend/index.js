@@ -24,7 +24,7 @@ app.get('/',(req, res)=>{
 
 app.get('/riskdata',async(req,res)=>{
     connection.query(
-        'SELECT * FROM `risk_data`',
+        'SELECT risk_id, risk_categories.category_name, risk_sources.source_name, buying_date, description, risk_probability, status, volume, value FROM risk_data Inner JOIN risk_categories on risk_data.category_id = risk_categories.category_id INNER JOIN risk_sources on risk_data.source_id = risk_sources.source_id;',
         function(err, results, fields) {
             
           console.log(results); // results contains rows returned by server
